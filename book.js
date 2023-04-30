@@ -24,6 +24,7 @@ submitBtn.onclick = function (evt) {
   addBookToLibrary();
   render()
   deleteForm()
+  localStorage.setItem('Library',JSON.stringify(library)) //changes 30/04
 };
 
 
@@ -36,8 +37,7 @@ function addBookToLibrary(){
     library.push(book);
   }else{
     window.alert('You forgot something to fill the gaps in form!')
-  }
-  
+  }  
 }
 
 function createCard(){
@@ -69,6 +69,7 @@ function createCard(){
 
     removeBtn.addEventListener('click', () => {
       library.splice(i,1);
+      localStorage.setItem('Library',JSON.stringify(library));
       console.log(library)
       render()
   });
@@ -90,11 +91,8 @@ function createCard(){
     });   
   }
 
-
-
-
- 
-  
-  
-
-
+  //changes 30/04
+  if (localStorage.getItem('Library')) {
+    library = JSON.parse(localStorage.getItem('Library'))
+    render()
+}
